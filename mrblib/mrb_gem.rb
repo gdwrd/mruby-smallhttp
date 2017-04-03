@@ -1,0 +1,2 @@
+class SmallHttp
+end
