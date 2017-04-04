@@ -21,9 +21,3 @@ assert("make a request") do
 
   assert_equal response.empty?, false
 end
-
-assert_equal("make a request with method missing") do
-  response = HTTP.new("http://mruby.org/about/").get
-
-  assert_equal response.empty?, false
-end

@@ -5,7 +5,7 @@ class HTTP
   URL_REGEXP = /^((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/
   HOST_REGEXP = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/\n]+)/
 
-  HTTP_VERSION = 'HTTP/1.2'
+  HTTP_VERSION = 'HTTP/1.1'
   CL_METHODS = %w(POST PUT)
   C_TYPE = %w(application/json application/x-www-form-urlencoded multipart/form-data)
   SEP = "\r\n"
