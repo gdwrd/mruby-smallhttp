@@ -21,6 +21,22 @@ class HTTP
     parse_url(url, port)
   end
 
+  def get(body = {}, header = {})
+    request("GET", body, header)
+  end
+
+  def post(body = {}, header = {})
+    request("POST", body, header)
+  end
+
+  def put(body = {}, header = {})
+    request("PUT", body, header)
+  end
+
+  def delete(body = {}, header = {})
+    request("DELETE", body, header)
+  end
+
   def request(method, body = {}, header = {})
     request  = create_request(method.upcase, body, header)
     response = send_request(request)

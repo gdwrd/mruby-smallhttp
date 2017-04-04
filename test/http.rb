@@ -16,8 +16,14 @@ assert("initialize would not accept wrong link") do
 end
 
 assert("make a request") do
-  http = HTTP.new("https://www.github.com/nsheremet")
+  http = HTTP.new("http://mruby.org/about/")
   response = http.request("GET")
+
+  assert_equal response.empty?, false
+end
+
+assert_equal("make a request with method missing") do
+  response = HTTP.new("http://mruby.org/about/").get
 
   assert_equal response.empty?, false
 end
