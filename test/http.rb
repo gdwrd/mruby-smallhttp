@@ -19,5 +19,11 @@ assert("make a request") do
   http = HTTP.new("http://mruby.org/about/")
   response = http.request("GET")
 
-  assert_equal response.empty?, false
+  assert_equal response.nil?, false
+end
+
+assert_equal("response should be parsed") do
+  response = HTTP.new("http://mruby.org/about/").get
+
+  assert_equal response.status, 200
 end

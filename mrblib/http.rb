@@ -39,8 +39,8 @@ class HTTP
 
   def request(method, body = {}, header = {})
     request  = create_request(method.upcase, body, header)
-    response = send_request(request)
-    # parse_response(response)
+    response_data = send_request(request)
+    Response.new(response_data)
   end
 
 private
