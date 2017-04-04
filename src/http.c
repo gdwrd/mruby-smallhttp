@@ -1,5 +1,5 @@
 /*
-** mrb_gem.c - gem class
+** http.c - gem class
 **
 ** Copyright (c) Nazarii Sheremet 2017
 **
@@ -8,7 +8,7 @@
 
 #include "mruby.h"
 #include "mruby/data.h"
-#include "mrb_gem.h"
+#include "http.h"
 
 #define DONE mrb_gc_arena_restore(mrb, 0);
 

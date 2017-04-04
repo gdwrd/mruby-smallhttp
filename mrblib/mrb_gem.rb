@@ -1,2 +1,0 @@
-class SmallHttp
-end
