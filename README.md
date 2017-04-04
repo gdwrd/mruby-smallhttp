@@ -10,7 +10,7 @@ mruby-smallhttp for mruby
 
 ```ruby
 MRuby::Build.new do |conf|
-  conf.gem :github => 'nsheremet/mruby-smallhttp'
+  conf.gem :mgem => 'mruby-smallhttp'
 end
 ```
 
