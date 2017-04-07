@@ -2,7 +2,7 @@ class HTTP
   attr_accessor :url
 
   # TODO need better regexp
-  URL_REGEXP = /^((http[s]?):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.*)?(#[\w\-]+)?$/
+  URL_REGEXP = /^(http:\\.|https:\\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
   HOST_REGEXP = /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/\n]+)/
 
   HTTP_VERSION = 'HTTP/1.1'
@@ -14,6 +14,7 @@ class HTTP
     port: 80,
     ssl_port: 443,
     accept: '*/*',
+    path: '/'
   }
 
   ##
@@ -249,7 +250,7 @@ private
       @url[:ssl_enabled] = !!url[/^(https)/]
 
       @url[:host] = url[HOST_REGEXP].split(url[/^(http[s]?)/] + '://')[1]
-      @url[:path] = url.split(url[HOST_REGEXP])[1]
+      @url[:path] = url.split(url[HOST_REGEXP])[1] || DEFAULTS[:path]
     else
       raise ArgumentError
     end

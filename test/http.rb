@@ -16,7 +16,7 @@ assert("initialize would not accept wrong link") do
 end
 
 assert("make a request") do
-  http = HTTP.new("http://mruby.org/about/")
+  http = HTTP.new("http://mruby.org")
   response = http.request("GET")
 
   assert_equal response.nil?, false
