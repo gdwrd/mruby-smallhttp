@@ -16,27 +16,82 @@ class HTTP
     accept: '*/*',
   }
 
+  ##
+  # Initialize HTTP
+  #
+  # Params:
+  # - url {String} target url
+  # - port {Int} traget port
+  #
+  # Response: Response.new
+  #
   def initialize(url, port = nil)
     @url = {}
     parse_url(url, port)
   end
 
+  ##
+  # GET Request
+  #
+  # Params:
+  # - body    {Hash} Request Body
+  # - header  {Hash} Reqeust Header
+  #
+  # Response: Response.new
+  #
   def get(body = {}, header = {})
     request("GET", body, header)
   end
 
+  ##
+  # POST Request
+  #
+  # Params:
+  # - body    {Hash} Request Body
+  # - header  {Hash} Reqeust Header
+  #
+  # Response: Response.new
+  #
   def post(body = {}, header = {})
     request("POST", body, header)
   end
 
+  ##
+  # PUT Request
+  #
+  # Params:
+  # - body    {Hash} Request Body
+  # - header  {Hash} Reqeust Header
+  #
+  # Response: Response.new
+  #
   def put(body = {}, header = {})
     request("PUT", body, header)
   end
 
+  ##
+  # DELETE Request
+  #
+  # Params:
+  # - body    {Hash} Request Body
+  # - header  {Hash} Reqeust Header
+  #
+  # Response: Response.new
+  #
   def delete(body = {}, header = {})
     request("DELETE", body, header)
   end
 
+  ##
+  # Send Request
+  #
+  # Params:
+  # - method  {String}  Request Method
+  # - body    {Hash}    Request Body
+  # - header  {Hash}    Request Header
+  #
+  # Response: Response.new
+  #
   def request(method, body = {}, header = {})
     request  = create_request(method.upcase, body, header)
     response_data = send_request(request)
@@ -45,6 +100,14 @@ class HTTP
 
 private
 
+  ##
+  # Send Request method
+  #
+  # Params:
+  # - data {String} body request
+  #
+  # Response: String response
+  #
   def send_request(data, result = {})
     socket = TCPSocket.new(@url[:host], @url[:port])
 
@@ -72,6 +135,16 @@ private
     result
   end
 
+  ##
+  # Create body request method
+  #
+  # Params:
+  # - method {String} request method
+  # - body {Hash} request body
+  # - header {Hash} request header
+  #
+  # Response: Request as String
+  #
   def create_request(method, body, header, str = "")
     @data = organize_header(header)
     body = create_body(@data['Content-Type'], body)
@@ -89,6 +162,15 @@ private
     str + SEP + body
   end
 
+  ##
+  # Create Body for Content-Type
+  #
+  # Params:
+  # - type {String} Content-Type
+  # - body {Hash} Request body
+  #
+  # Response: Request Body as String
+  #
   def create_body(type, body)
     if type == C_TYPE[1]                               # if Content-Type => 'application/x-www-form-urlencoded'
       str = ""
@@ -123,6 +205,14 @@ private
     end
   end
 
+  ##
+  # Create Header for request
+  #
+  # Params:
+  # - header {Hash} Request Header
+  #
+  # Response: Header as Hash
+  #
   def organize_header(header, data = {})
     header.each do |key, value|
       if !data[key].nil?
@@ -144,6 +234,15 @@ private
     data
   end
 
+  ##
+  # Parse URL
+  #
+  # Params:
+  # - url {String}
+  # - port {Int}
+  #
+  # Response: parse URL to @url
+  #
   def parse_url(url, port)
     if !!url[URL_REGEXP]
       @url[:port] = port.nil? ? !!url[/^(https)/] ? DEFAULTS[:ssl_port] : DEFAULTS[:port] : port

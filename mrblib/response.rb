@@ -1,6 +1,14 @@
 class Response
   attr_accessor :status, :headers, :body, :response
 
+  ##
+  # Initialize Response
+  #
+  # Params:
+  # - data {String} Response string
+  #
+  # Response: Response.new
+  #
   def initialize(data)
     @headers = {}
     @status = nil
