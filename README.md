@@ -53,7 +53,7 @@ http = HTTP.new("https://example.com/api/v1/users/1")
 http.post(body, header)
 #=> response
 ```
-`Content-Type` supported: `application/json`, `application/x-www-form-urlencoded`, `multipart/form-data`
+`Content-Type` supported: `application/json`, `application/x-www-form-urlencoded`, `multipart/form-data` and `text/plain`
 
 ## License
 under the MIT License:
