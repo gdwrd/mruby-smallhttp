@@ -7,7 +7,7 @@ class HTTP
 
   HTTP_VERSION = 'HTTP/1.1'
   CL_METHODS = %w(POST PUT)
-  C_TYPE = %w(application/json application/x-www-form-urlencoded multipart/form-data)
+  C_TYPE = %w(application/json application/x-www-form-urlencoded multipart/form-data text/plain)
   SEP = "\r\n"
 
   DEFAULTS = {
@@ -201,6 +201,8 @@ private
       str += "--#{@boundary}--"
 
       return str
+    elsif type == C_TYPE[3]                           # if Content-Type => 'text/plain'
+      body.to_s
     else                                              # if Content-Type => 'application/json'
       return body.to_json
     end
